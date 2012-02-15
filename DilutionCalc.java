@@ -128,49 +128,15 @@ public class DilutionCalc extends JFrame implements ActionListener {
             }
 
             display.setText(display.getText() + "Your dilution input was:" + "   M1: " + m1 + m1unit + "  M2: " + m2 + m2unit + "  V2: " + v2 + v2unit);
+            display.setText(display.getText() + "\nV1 = " + "( " + m2 + m2unit + " * " + v2 + v2unit + " ) / " + m1 + m1unit);
 
             /* Convert based on units */
-            if(m1unit.equals("mM")) {
-                // m1 *= .001;
-                m1 *= 1E-03;
-            }
-            else if(m1unit.equals("\u00B5M")) {
-                //m1 *= .000001;
-                m1 *= 1E-06;
-            }
-            else if(m1unit.equals("nM")) {
-                //m1 *= .000000001;
-                m1 *= 1E-09;
-            }
 
-            if(m2unit.equals("mM")) {
-                //m2 *= .001;
-                m2 *= 1E-03;
-            }
-            else if(m2unit.equals("\u00B5M")) {
-                //m2 *= .0000;
-                m2 *= 1E-06;
-            }
-            else if(m2unit.equals("nM")) {
-                //m2 *= .000000001;
-                m2 *= 1E-09;
-            }
+            m1 = readUnits(m1, m1unit);
+            m2 = readUnits(m2, m2unit);
+            v2 = readUnits(v2, v2unit);
 
-            if(v2unit.equals("mL")) {
-                //v2 *= .001;
-                v2 *= 1E-03;
-            }
-            else if(v2unit.equals("\u00B5L")) {
-                //v2 *= .000001;
-                v2 *= 1E-06;
-            }
-            else if(v2unit.equals("nL")) {
-                //v2 *= .000000001;
-                v2 *= 1E-09;
-            }
-
-
-
+            /* Calculate the output v1 */
             v1 = ((m2*v2)/m1);
             String v1unit = "";
 
@@ -190,52 +156,25 @@ public class DilutionCalc extends JFrame implements ActionListener {
                 v1unit = "L";
             }
 
-            if(v2 * 1000 >= 1 && v2 * 1000 <= 100) {
-                v2 *= 1000;
-                v2unit = "mL";
-            }
-            else if(v2 * 1000000 >= 1 && v2 * 1000000 <= 100) {
-                v2 *= 1000000;
-                v2unit = "\u00B5L";
-            }
-            else if(v2 * 1000000000 >= 1 && v2 * 1000000000 <= 100) {
-                v2 *= 1000000000;
-                v2unit = "nL";
-            }
-
-            if(m2 * 1000 >= 1 && m2 * 1000 <= 100) {
-                m2 *= 1000;
-                m2unit = "mL";
-            }
-            else if(m2 * 1000000 >= 1 && m2 * 1000000 <= 100) {
-                m2 *= 1000000;
-                m2unit = "\u00B5L";
-            }
-            else if(m2 * 1000000000 >= 1 && m2 * 1000000000 <= 100) {
-                m2 *= 1000000000;
-                m2unit = "nL";
-            }
-
-
-            if(m1 * 1000 >= 1 && m1 * 1000 <= 100) {
-                m1 *= 1000;
-                m1unit = "mL";
-            }
-            else if(m1 * 1000000 >= 1 && m1 * 1000000 <= 100) {
-                m1 *= 1000000;
-                m1unit = "\u00B5L";
-            }
-            else if(m1 * 1000000000 >= 1 && m1 * 1000000000 <= 100) {
-                m1 *= 1000000000;
-                m1unit = "nL";
-            }
-
-
-            display.setText(display.getText() + "\nV1 = " + "( " + m2 + m2unit + " * " + v2 + v2unit + " ) / " + m1 + m1unit);
             display.setText(display.getText() + ("\nV1 = " + v1 + v1unit) + "\n\n");
         }
     }
 
+    public double readUnits(double item, String itemUnits) {
+ 
+            /* Convert based on units */
+            if(itemUnits.equals("mM") || itemUnits.equals("mL")) {
+                item *= 1E-03;
+            }
+            else if(itemUnits.equals("\u00B5M") || itemUnits.equals("\u00B5L")) {
+                item *= 1E-06;
+            }
+            else if(itemUnits.equals("nM") || itemUnits.equals("nL")) {
+                item *= 1E-09;
+            }
+
+            return item;
+    }
 
     /* Main method */
     public static void main(String[] args) {
