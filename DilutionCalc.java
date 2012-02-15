@@ -241,7 +241,7 @@ public class DilutionCalc extends JFrame implements ActionListener {
     public static void main(String[] args) {
         DilutionCalc dc = new DilutionCalc();
         dc.setDefaultCloseOperation(EXIT_ON_CLOSE);     // close on exit
-        dc.setSize(new Dimension(800, 600));            // set the size to be 600x400 (pixels)
+        dc.setSize(new Dimension(800, 600));            // set the size to be 800x600 (pixels)
         dc.setLocationRelativeTo(null);                 // center the frame (note: after sizing so it is really centered)
         dc.setVisible(true);                            // show it off to the world
     }   
