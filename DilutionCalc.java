@@ -4,7 +4,7 @@
  *
  * Calculate the dilutions for lab
  * This uses M1V1 = M2V2
- * User input: M1 M2 V1 
+ * User input: M1 M2 V1
  */
 
 import java.util.*;
@@ -13,7 +13,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class DilutionCalc extends JFrame implements ActionListener {
-    
+
     /* Properties */
     private double m1, m2;  // molarity of solution
     private double v1, v2;  // volume of solution
@@ -23,7 +23,7 @@ public class DilutionCalc extends JFrame implements ActionListener {
     private JEditorPane display;    // area the results will be displayed
     private JPanel center;  // container for the display
     private JScrollPane results;    // scrolling pane for the display pane
-    
+
     /* South Panel */
     private JPanel south;   // south panel that will hold the text fields for user input
     private JPanel m1panel, m2panel, v2panel;   // panels to hold the label and text fields for input
@@ -32,7 +32,7 @@ public class DilutionCalc extends JFrame implements ActionListener {
     private final int TEXT_BOX_SIZE = 5;    // size for text fields
     private JButton submit; // submit the input
     private JComboBox m1units, m2units, v2units;    // dropbox to select units for volume
-    private final Object[] VOLUME_UNIT_OPTIONS = {"L", "mL", "\u00B5L", "nL"};  // type object instead of using java 
+    private final Object[] VOLUME_UNIT_OPTIONS = {"L", "mL", "\u00B5L", "nL"};  // type object instead of using java
                                                                                 // generics so that it is backwards
                                                                                 // compatible with pre Java 7
     private final Object[] MOLAR_UNIT_OPTIONS = {"M", "mM", "\u00B5M", "nM"};
@@ -76,7 +76,7 @@ public class DilutionCalc extends JFrame implements ActionListener {
         m1panel = new JPanel();     m2panel = new JPanel();     v2panel = new JPanel();
 
         m1l = new JLabel("M1:");    m2l = new JLabel("M2:");    v2l = new JLabel("V2:");
-        
+
         m1in = new JTextField(TEXT_BOX_SIZE);
         m2in = new JTextField(TEXT_BOX_SIZE);
         v2in = new JTextField(TEXT_BOX_SIZE);
@@ -90,7 +90,7 @@ public class DilutionCalc extends JFrame implements ActionListener {
         v2panel.add(v2l);   v2panel.add(v2in);  v2panel.add(v2units);
 
         submit = new JButton("Calculate");  submit.addActionListener(this);
-        
+
         south.add(m1panel); south.add(m2panel); south.add(v2panel); south.add(submit);  // add components to the south panel
     }
 
@@ -116,7 +116,7 @@ public class DilutionCalc extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Please input a value for V2", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-          
+
             try {
                 m1 = Double.parseDouble(m1s);
                 m2 = Double.parseDouble(m2s);
@@ -161,7 +161,7 @@ public class DilutionCalc extends JFrame implements ActionListener {
     }
 
     public double readUnits(double item, String itemUnits) {
- 
+
             /* Convert based on units */
             if(itemUnits.equals("mM") || itemUnits.equals("mL")) {
                 item *= 1E-03;
@@ -183,7 +183,7 @@ public class DilutionCalc extends JFrame implements ActionListener {
         dc.setSize(new Dimension(800, 600));            // set the size to be 800x600 (pixels)
         dc.setLocationRelativeTo(null);                 // center the frame (note: after sizing so it is really centered)
         dc.setVisible(true);                            // show it off to the world
-    }   
+    }
 
 }
 
