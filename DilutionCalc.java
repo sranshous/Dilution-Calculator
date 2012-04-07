@@ -30,7 +30,7 @@ public class DilutionCalc extends JFrame implements ActionListener {
     private JLabel m1l, m2l, v2l;   // labels for the input boxes
     private JTextField m1in, m2in, v2in;    // input boxes for the numbers from the user
     private final int TEXT_BOX_SIZE = 5;    // size for text fields
-    private JButton submit; // submit the input
+    private JButton submit, clear; // submit the input, clear the screen
     private JComboBox m1units, m2units, v2units;    // dropbox to select units for volume
     private final Object[] VOLUME_UNIT_OPTIONS = {"L", "mL", "\u00B5L", "nL"};  // type object instead of using java
                                                                                 // generics so that it is backwards
@@ -70,7 +70,8 @@ public class DilutionCalc extends JFrame implements ActionListener {
 
         // Each column will hold its own JPanel which will be used as a container for both the
         // label and text fields. The fourth column will be used for the "Calculate" button
-        south.setLayout(new GridLayout(0, 4, 5, 5));
+        // and the fifth for the clear screen button
+        south.setLayout(new GridLayout(0, 5, 5, 5));
 
         // create the input panels
         m1panel = new JPanel();     m2panel = new JPanel();     v2panel = new JPanel();
@@ -89,9 +90,12 @@ public class DilutionCalc extends JFrame implements ActionListener {
         m2panel.add(m2l);   m2panel.add(m2in);  m2panel.add(m2units);
         v2panel.add(v2l);   v2panel.add(v2in);  v2panel.add(v2units);
 
-        submit = new JButton("Calculate");  submit.addActionListener(this);
+        submit = new JButton("Calculate");      submit.addActionListener(this);
+        clear = new JButton("Clear Screen");    clear.addActionListener(this);
 
-        south.add(m1panel); south.add(m2panel); south.add(v2panel); south.add(submit);  // add components to the south panel
+        // add the components
+        south.add(m1panel); south.add(m2panel); south.add(v2panel);
+        south.add(submit);  south.add(clear);
     }
 
     /* Override ActionListener */
@@ -157,6 +161,9 @@ public class DilutionCalc extends JFrame implements ActionListener {
             }
 
             display.setText(display.getText() + ("\nV1 = " + v1 + v1unit) + "\n\n");
+        }
+        else if(e.getSource() == clear) {
+            display.setText("");
         }
     }
 
